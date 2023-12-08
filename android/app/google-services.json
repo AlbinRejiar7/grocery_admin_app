@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "43847231737",
+    "project_id": "grocery-app-935d8",
+    "storage_bucket": "grocery-app-935d8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:43847231737:android:e877e71256b04ef1d09a28",
+        "android_client_info": {
+          "package_name": "com.example.grocery_admin_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "43847231737-6rlmrpba0cd1mkgq3tmopmsbcv52ir8u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCo8BYYe83Ql3QvcxvCv3P8IwX08CChQdc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "43847231737-6rlmrpba0cd1mkgq3tmopmsbcv52ir8u.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "43847231737-2es4hp4suf395hh97rde3rj0iu4kuhn0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.groceryApp.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:43847231737:android:363ece91dabd233ad09a28",
+        "android_client_info": {
+          "package_name": "com.example.grocery_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "43847231737-6rlmrpba0cd1mkgq3tmopmsbcv52ir8u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCo8BYYe83Ql3QvcxvCv3P8IwX08CChQdc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "43847231737-6rlmrpba0cd1mkgq3tmopmsbcv52ir8u.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "43847231737-2es4hp4suf395hh97rde3rj0iu4kuhn0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.groceryApp.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

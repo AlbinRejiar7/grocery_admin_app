@@ -1,9 +1,23 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class OrdersWidget extends StatelessWidget {
-  const OrdersWidget({super.key});
+  final String imageUrl, userId, productId, userName, address;
+  final double price, totalPrice;
+  final int quantity;
+  final Timestamp ordeDate;
+
+  const OrdersWidget(
+      {super.key,
+      required this.imageUrl,
+      required this.userId,
+      required this.productId,
+      required this.price,
+      required this.totalPrice,
+      required this.userName,
+      required this.quantity,
+      required this.ordeDate,
+      required this.address});
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +27,8 @@ class OrdersWidget extends StatelessWidget {
         SizedBox(
             height: size.width * 0.2,
             width: size.width * 0.2,
-            child: Image.network(
-                "https://www.lifepng.com/wp-content/uploads/2020/11/Apricot-Large-Single-png-hd.png")),
-        SizedBox(
+            child: Image.network(imageUrl)),
+        const SizedBox(
           width: 10,
         ),
         Column(
@@ -23,11 +36,12 @@ class OrdersWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "12x fpr \$19.9",
-              style: TextStyle(fontSize: 20),
+              "${quantity.toString()}x for ₹ ${price.toStringAsFixed(2)}",
+              style: const TextStyle(fontSize: 20),
             ),
-            Text("user name"),
-            Text("20/03/2022")
+            Text("Ordered By $userName"),
+            Text("Address : $address"),
+            Text("Order Date:${ordeDate.toDate().toUtc().toLocal()}")
           ],
         )
       ],

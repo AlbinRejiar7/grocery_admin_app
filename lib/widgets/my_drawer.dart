@@ -1,12 +1,6 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
-import 'package:grocery_admin_app/view/home_screen.dart';
 import 'package:grocery_admin_app/view/view_all_order_screen.dart';
 import 'package:grocery_admin_app/view/view_all_product_screen.dart';
-import 'package:provider/provider.dart';
-
-import '../controller/dark_theme_controller.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({
@@ -18,9 +12,9 @@ class MyDrawer extends StatefulWidget {
 }
 
 class _MyDrawerState extends State<MyDrawer> {
+  bool currentTheme = false;
   @override
   Widget build(BuildContext context) {
-    final themeController = Provider.of<DarkThemeProvider>(context);
     return Drawer(
       child: Column(
         children: [
@@ -28,53 +22,30 @@ class _MyDrawerState extends State<MyDrawer> {
             height: 150,
             child: Image.asset("assets/icons/groceries.png"),
           ),
-          Divider(),
+          const Divider(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 14),
             child: Column(
               children: [
-                Row(
-                  children: [
-                    Icon(
-                      Icons.home,
-                      size: 24,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomeScreen()));
-                      },
-                      child: Text(
-                        "Main",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
-                      ),
-                    )
-                  ],
-                ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.padding_rounded,
                       size: 24,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => AllProductsScreen()));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) =>
+                                const ViewAllProductScreen()));
                       },
-                      child: Text(
+                      child: const Text(
                         "View All product",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20),
@@ -82,51 +53,37 @@ class _MyDrawerState extends State<MyDrawer> {
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.shopping_bag,
                       size: 24,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => ViewAllOrderScreen()));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const ViewAllOrderScreen()));
                       },
-                      child: Text(
+                      child: const Text(
                         "View all order",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
-          SwitchListTile(
-              secondary: Icon(themeController.getDarkTheme
-                  ? Icons.dark_mode_outlined
-                  : Icons.light_mode_outlined),
-              title: Text(
-                "Theme",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              ),
-              value: themeController.getDarkTheme,
-              onChanged: (value) {
-                setState(() {
-                  themeController.setDarkTheme = value;
-                });
-              })
         ],
       ),
     );

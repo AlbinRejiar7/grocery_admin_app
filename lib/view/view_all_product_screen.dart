@@ -1,29 +1,86 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:grocery_admin_app/widgets/my_drawer.dart';
-import 'package:grocery_admin_app/widgets/myappbar.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:grocery_admin_app/widgets/products_widget.dart';
 
-class AllProductsScreen extends StatefulWidget {
-  const AllProductsScreen({super.key});
+class ViewAllProductScreen extends StatefulWidget {
+  const ViewAllProductScreen({
+    super.key,
+  });
 
   @override
-  State<AllProductsScreen> createState() => _AllProductsScreenState();
+  State<ViewAllProductScreen> createState() => _ViewAllProductScreenState();
 }
 
-class _AllProductsScreenState extends State<AllProductsScreen> {
+class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
+  String query = "";
+  final CollectionReference productsCollection =
+      FirebaseFirestore.instance.collection('products');
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: MyDrawer(),
-      appBar: myappbar(),
-      body: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
+    return SafeArea(
+      child: Scaffold(
+        body: ListView(
+          children: [
+            TextField(
+              onChanged: (val) {
+                setState(() {
+                  query = val;
+                });
+              },
+              decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.green[900],
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  prefixIcon: const Icon(Icons.search),
+                  border: const OutlineInputBorder(),
+                  hintText: "Search"),
+            ),
+            StreamBuilder<QuerySnapshot>(
+                stream: query.isEmpty
+                    ? productsCollection.snapshots()
+                    : productsCollection
+                        .where('title', isGreaterThanOrEqualTo: query)
+                        .where('title', isLessThan: '${query}z')
+                        .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const SpinKitCircle(
+                      color: Colors.black,
+                    );
+                  } else if (snapshot.data!.docs.isEmpty) {
+                    return const Center(
+                        child: Text(
+                      "NO PRODUCTS",
+                      style: TextStyle(fontSize: 40),
+                    ));
+                  } else if (snapshot.connectionState ==
+                      ConnectionState.active) {
+                    return GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 10,
+                              mainAxisSpacing: 10),
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ProductWidget(
+                          id: snapshot.data!.docs[index]["id"],
+                        );
+                      },
+                    );
+                  } else {
+                    return const Text("Something wrong");
+                  }
+                }),
+          ],
         ),
-        itemCount: 6,
-        itemBuilder: (BuildContext context, int index) {
-          return ProductWidget();
-        },
       ),
     );
   }
