@@ -22,29 +22,32 @@ class OrdersWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Row(
-      children: [
-        SizedBox(
-            height: size.width * 0.2,
-            width: size.width * 0.2,
-            child: Image.network(imageUrl)),
-        const SizedBox(
-          width: 10,
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "${quantity.toString()}x for ₹ ${price.toStringAsFixed(2)}",
-              style: const TextStyle(fontSize: 20),
-            ),
-            Text("Ordered By $userName"),
-            Text("Address : $address"),
-            Text("Order Date:${ordeDate.toDate().toUtc().toLocal()}")
-          ],
-        )
-      ],
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [
+          SizedBox(
+              height: size.width * 0.2,
+              width: size.width * 0.2,
+              child: Image.network(imageUrl)),
+          const SizedBox(
+            width: 10,
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "${quantity.toString()}x for ₹ ${price.toStringAsFixed(2)}",
+                style: const TextStyle(fontSize: 20),
+              ),
+              Text("Ordered By $userName"),
+              Text("Address : $address"),
+              Text("Order Date:${ordeDate.toDate().toUtc().toLocal()}")
+            ],
+          )
+        ],
+      ),
     );
   }
 }
